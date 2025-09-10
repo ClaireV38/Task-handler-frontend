@@ -14,7 +14,7 @@ export default function Login() {
             localStorage.setItem("token", data.token);
             navigate("/dashboard");
         } else {
-            setError("Login failed");
+            setError(data.error);
         }
     };
 

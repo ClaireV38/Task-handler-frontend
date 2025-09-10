@@ -16,7 +16,7 @@ export default function Dashboard() {
     return (
         <div>
             <h1>Dashboard</h1>
-            <p>Welcome, {user.name}</p>
+            <p>Welcome, {user.data.name}</p>
         </div>
     );
 }

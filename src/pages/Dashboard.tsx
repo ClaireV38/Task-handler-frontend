@@ -1,22 +1,15 @@
-import { useEffect, useState } from "react";
-import { getMe } from "../services/api";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Dashboard() {
-    const [user, setUser] = useState<any>(null);
+    const { user, loading } = useAuth();
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            getMe(token).then(setUser);
-        }
-    }, []);
-
-    if (!user) return <p>Loading...</p>;
+    if (loading) return <p>Loading...</p>;
+    if (!user) return null;
 
     return (
         <div>
             <h1>Dashboard</h1>
-            <p>Welcome, {user.data.name}</p>
+            <p>Welcome, {user.name}</p>
         </div>
     );
 }

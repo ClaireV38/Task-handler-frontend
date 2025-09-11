@@ -1,7 +1,7 @@
 # TaskHandler Frontend
 
 This is the **frontend application** for the TaskHandler project.  
-It is built with **React + TypeScript + Vite** and communicates with the [TaskHandler Backend](https://github.com/ClaireV38/taskhandler-backend) (Laravel API).
+It is built with **React + TypeScript + Vite** and communicates with the [TaskHandler Backend](https://github.com/ClaireV38/Task-handler-backend) (Laravel API).
 
 ---
 

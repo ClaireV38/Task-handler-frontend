@@ -1,3 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -65,4 +73,17 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.btn {
+  @apply px-4 py-2 rounded-lg font-semibold transition;
+}
+
+.btn-primary {
+  @apply text-white hover:bg-blue-700;
+  background-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
 }

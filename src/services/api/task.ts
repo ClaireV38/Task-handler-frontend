@@ -1,4 +1,3 @@
-// src/services/api/task.ts
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
@@ -42,7 +41,7 @@ export async function getTask(id: number): Promise<Task> {
         },
     });
 
-    return response.data;
+    return response.data.data;
 }
 
 

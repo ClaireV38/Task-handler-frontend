@@ -1,4 +1,4 @@
-export const API_URL = "http://taskhandler.local:8000/api";
+export const API_URL = "http://taskhandler.local/api";
 
 export const login = async (email: string, password: string) => {
     try {

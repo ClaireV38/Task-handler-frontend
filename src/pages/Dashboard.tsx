@@ -1,15 +1,29 @@
 import { useAuth } from "../hooks/useAuth";
 import { useTasks } from "../services/api/task"
+import {useState} from "react";
 
 export default function Dashboard() {
     const { user, loading } = useAuth();
-    const { data: tasks, isLoading, isError } = useTasks();
+    const [selectedStatus, setSelectedStatus] = useState("");
+    const { data: tasks, isLoading, isError } = useTasks({user_id: null, status: selectedStatus});
 
     if (loading || isLoading ) return <p>Loading...</p>;
     if (!user || isError ) return null;
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+            <select
+                className="border dorder-gray-300 rounded-lg p-2"
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+            >
+                <option value="all">Tous les statuts</option>
+                <option value="backlog">Backlog</option>
+                <option value="todo">A faire</option>
+                <option value="doing">En cours</option>
+                <option value="review">En revue</option>
+                <option value="done">Terminée</option>
+            </select>
             {tasks?.map((task) => (
                 <div
                     key={task.id}

@@ -13,17 +13,23 @@ export interface Task {
     updated_at?: string;
 }
 
-export function useTasks() {
+export interface Filters {
+    user_id: number;
+    status: string;
+}
+
+export function useTasks(filters?: { user_id: null; status: string }) {
     return useQuery({
-        queryKey: ['tasks'],
-        queryFn: getTasks,
+        queryKey: ['tasks', filters],
+        queryFn: () => getTasks(filters),
     });
 }
 
-export async function getTasks(): Promise<Task[]> {
+export async function getTasks(filters = {}): Promise<Task[]> {
     const token = localStorage.getItem('token');
 
     const response = await axios.get(`${API_URL}/tasks`, {
+        params: filters,
         headers: {
             Authorization: `Bearer ${token}`,
         },

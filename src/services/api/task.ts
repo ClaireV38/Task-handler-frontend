@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { TaskStatus } from "../../constants/taskStatus";
 
 const API_URL = 'http://taskhandler.local/api';
 
@@ -15,7 +16,7 @@ export interface Task {
 
 export interface Filters {
     user_id: number;
-    status: string;
+    status: TaskStatus;
 }
 
 export function useTasks(filters?: { user_id: null; status: string }) {

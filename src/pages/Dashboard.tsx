@@ -1,10 +1,11 @@
 import { useAuth } from "../hooks/useAuth";
 import { useTasks } from "../services/api/task"
-import {useState} from "react";
+import { useState } from "react";
+import { TaskStatus, TaskStatusLabels } from "../constants/taskStatus";
 
 export default function Dashboard() {
     const { user, loading } = useAuth();
-    const [selectedStatus, setSelectedStatus] = useState("");
+    const [selectedStatus, setSelectedStatus] = useState<TaskStatus>(TaskStatus.ALL);
     const { data: tasks, isLoading, isError } = useTasks({user_id: null, status: selectedStatus});
 
     if (loading || isLoading ) return <p>Loading...</p>;
@@ -17,12 +18,11 @@ export default function Dashboard() {
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
             >
-                <option value="all">Tous les statuts</option>
-                <option value="backlog">Backlog</option>
-                <option value="todo">A faire</option>
-                <option value="doing">En cours</option>
-                <option value="review">En revue</option>
-                <option value="done">Terminée</option>
+                {Object.values(TaskStatus).map((status) => (
+                    <option key={status} value={status}>
+                        {TaskStatusLabels[status]}
+                    </option>
+                ))}
             </select>
             {tasks?.map((task) => (
                 <div
@@ -36,7 +36,7 @@ export default function Dashboard() {
                         {task.description}
                     </p>
                     <span className="inline-block text-xs font-medium text-gray-500 dark:text-gray-400">
-        {task.status}
+        {TaskStatusLabels[task.status as TaskStatus] ?? task.status}
       </span>
                 </div>
             ))}

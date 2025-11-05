@@ -20,6 +20,14 @@ export function useTasks() {
     });
 }
 
+export function useTask(id?: number) {
+    return useQuery({
+        queryKey: ['task'],
+        queryFn: () => getTask(id!),
+        enabled: !!id,
+    });
+}
+
 export async function getTasks(): Promise<Task[]> {
     const token = localStorage.getItem('token');
 

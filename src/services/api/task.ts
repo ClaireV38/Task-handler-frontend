@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { TaskStatus } from "../../constants/taskStatus";
+import type {User} from "./user.ts";
 
 const API_URL = 'http://taskhandler.local/api';
 
@@ -23,19 +24,12 @@ export interface Task {
     media?: Media[];
 }
 
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    created_at?: string;
-}
-
 export interface Filters {
     user_id: number;
     status: TaskStatus;
 }
 
-export function useTasks(filters?: { user_id: null; status: string }) {
+export function useTasks(filters?: { user_id: number|null; status: string }) {
     return useQuery({
         queryKey: ['tasks', filters],
         queryFn: () => getTasks(filters),

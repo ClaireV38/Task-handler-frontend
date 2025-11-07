@@ -16,10 +16,17 @@ export interface Task {
     title: string;
     description: string;
     status: string;
-    user_id: number;
+    user: User;
     created_at?: string;
     updated_at?: string;
     media?: Media[];
+}
+
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+    created_at?: string;
 }
 
 export function useTasks() {

@@ -13,12 +13,12 @@ export default function TaskDetail() {
     if (isError) return <p>Erreur lors du chargement de la tâche</p>;
     if (!task) return <p>Aucune tâche trouvée</p>;
 
-    console.log(mediaId);
-
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-2">{task.title}</h1>
             <p>{task.description}</p>
+            <p>{task.description}</p>
+            <p>created by: {task.user.name}</p>
             <span className="text-gray-500">{task.status}</span>
 
             {videoLoading && <p>Chargement de la vidéo...</p>}

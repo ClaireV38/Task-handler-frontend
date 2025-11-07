@@ -1,5 +1,6 @@
 import { useAuth } from "../hooks/useAuth";
 import { useTasks } from "../services/api/task"
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
     const { user, loading } = useAuth();
@@ -11,7 +12,8 @@ export default function Dashboard() {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
             {tasks?.map((task) => (
-                <div
+                <Link
+                    to={`/tasks/${task.id}`}
                     key={task.id}
                     className="block p-6 bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md hover:bg-gray-50 transition-all dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
@@ -24,7 +26,7 @@ export default function Dashboard() {
                     <span className="inline-block text-xs font-medium text-gray-500 dark:text-gray-400">
         {task.status}
       </span>
-                </div>
+                </Link>
             ))}
         </div>
     );

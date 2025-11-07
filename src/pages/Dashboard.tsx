@@ -2,6 +2,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useTasks } from "../services/api/task"
 import { useState } from "react";
 import { TaskStatus, TaskStatusLabels } from "../constants/taskStatus";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
     const { user, loading } = useAuth();
@@ -25,7 +26,8 @@ export default function Dashboard() {
                 ))}
             </select>
             {tasks?.map((task) => (
-                <div
+                <Link
+                    to={`/tasks/${task.id}`}
                     key={task.id}
                     className="block p-6 bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md hover:bg-gray-50 transition-all dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
@@ -38,7 +40,7 @@ export default function Dashboard() {
                     <span className="inline-block text-xs font-medium text-gray-500 dark:text-gray-400">
         {TaskStatusLabels[task.status as TaskStatus] ?? task.status}
       </span>
-                </div>
+                </Link>
             ))}
         </div>
     );
